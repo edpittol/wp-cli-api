@@ -5,11 +5,21 @@
     "require": {
         "wp-cli/wp-cli": "^0.24.1"
     },
+    "require-dev": {
+    	"squizlabs/php_codesniffer": "~2.7.0",
+    	"phpunit/phpunit": "~5.5.0",
+        "phpunit/php-code-coverage": "^4.0"
+    },
     "license": "GPLv3",
     "authors": [
         {
             "name": "Eduardo Pittol",
             "email": "edpittol@gmail.com"
         }
-    ]
+    ],
+    "autoload": {
+    	"psr-4": {
+    		"WP_CLI\\Api\\": "src/"
+    	}
+    }
 }

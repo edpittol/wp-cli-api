@@ -10,3 +10,6 @@
 /vendor/
 /composer.lock
 /composer.phar
+
+# Project build
+/build/
