@@ -3,7 +3,8 @@
     "description": "An API to manipulate an WordPress installation by code.",
     "type": "library",
     "require": {
-        "wp-cli/wp-cli": "^0.24.1"
+        "wp-cli/wp-cli": "^0.24.1",
+        "psr/log": "^1.0"
     },
     "require-dev": {
     	"squizlabs/php_codesniffer": "~2.7.0",
@@ -19,7 +20,8 @@
     ],
     "autoload": {
     	"psr-4": {
-    		"WP_CLI\\Api\\": "src/"
+    		"WP_CLI\\Api\\": "src/",
+    		"WP_CLI\\Api\\Test\\": "tests/"
     	}
     }
 }

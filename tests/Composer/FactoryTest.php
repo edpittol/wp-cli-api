@@ -1,5 +1,5 @@
 <?php
-namespace WP_CLI\Api\Composer\Test;
+namespace WP_CLI\Api\Test\Composer;
 
 use PHPUnit\Framework\TestCase;
 use WP_CLI\Api\Composer\Factory;
