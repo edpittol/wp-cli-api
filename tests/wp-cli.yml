@@ -1,0 +1,14 @@
+path: wp
+url: http://localhost:8080
+
+core config:
+  dbname: wp_cli_api_tests
+  dbuser: root
+  dbpass:
+
+core install:
+  title: WP-CLI API Tests
+  admin_user: admin
+  admin_password: admin
+  admin_email: admin@admin.com
+  skip-email: true
