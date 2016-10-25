@@ -13,6 +13,11 @@ WP=./../vendor/bin/wp
 if [ ! -f wp/wp-load.php ]; then
     echo 'Downloading WordPress'
     $WP core download
+fi
+
+# Create the wp-config.php file, if not exists
+if [ ! -f wp/wp-config.php ]; then
+    echo 'Configuring WordPress'
     $WP core config
 fi
 
