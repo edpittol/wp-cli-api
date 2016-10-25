@@ -22,4 +22,11 @@ if ! $WP core is-installed 2> /dev/null; then
     $WP core install
 fi
 
-$WP server
+# Start the WP internal server
+$WP server > /dev/null 2>&1 &
+
+# Sleep 1 second to waiting the server up
+sleep 1
+
+# Print the webserver PID
+lsof -i :8080 | sed '2q;d' | awk '{ print $2 }'

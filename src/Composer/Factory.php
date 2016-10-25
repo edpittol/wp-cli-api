@@ -21,6 +21,8 @@ class Factory extends BaseFactory
     {
         $factory = new static();
         
-        return $factory->createComposer(new NullIO(), null, true, null, false);
+        $configFile = __DIR__ . '/../../composer.json';
+        
+        return $factory->createComposer(new NullIO(), $configFile, true, null, false);
     }
 }

@@ -35,12 +35,9 @@ class Process
     /**
      * Create the WP-CLI process.
      *
-     * @param string $command
-     *            The WP-CLI command to run.
-     * @param string $subcommand
-     *            The subcommand.
-     * @param array $arguments
-     *            The command arguments.
+     * @param string $command The WP-CLI command to run.
+     * @param string $subcommand  The subcommand.
+     * @param array $arguments The command arguments.
      */
     public function __construct($command, $subcommand, $arguments = array())
     {
@@ -100,6 +97,8 @@ class Process
         if (! $process->isSuccessful()) {
             throw new ProcessFailedException($process);
         }
+        
+        return $process->getOutput();
     }
 
     /**

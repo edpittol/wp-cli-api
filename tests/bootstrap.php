@@ -11,13 +11,10 @@ require_once 'vendor/autoload.php';
 // Change to this dir to read the wp-cli.yml file
 chdir(__DIR__);
 
-$command = sprintf('./server.sh > /dev/null 2>&1 & echo $!');
-
-// Execute the command and store the process ID
+// Execute the command and store the web server PID
 $output = array();
-exec($command, $output);
+exec('./server.sh', $output);
 $pid = (int) $output[0];
-
 echo sprintf('Web server started with PID %d', $pid) . PHP_EOL;
 
 // Kill the web server when the process ends
