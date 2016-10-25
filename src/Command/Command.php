@@ -15,7 +15,7 @@ abstract class Command
      * @var string[] The command arguments in flat mode.
      */
     private $arguments;
-    
+
     /**
      * 
      * @var string|null[string] The command extrated to separate key and value.
@@ -23,6 +23,12 @@ abstract class Command
      *  will be null.
      */
     private $extractedArguments = array();
+
+    /**
+     * 
+     * @var string Pass some data to the command by STDIN.
+     */
+    private $input;
 
     /**
      * Instantiate a command. The constructor extract the arguments to a 
@@ -36,12 +42,13 @@ abstract class Command
      * @param string[] $args The command arguments. They must be passed in the
      *  flat format. For example: '--foo=bar'.
      */
-    public function __construct(array $args = array())
+    public function __construct(array $args = array(), $input = '')
     {
         $this->arguments = $args;
         $this->extractArguments();
         $this->validateArguments();
         $this->setDefaults();
+        $this->input = $input;
     }
 
     /**
@@ -55,6 +62,11 @@ abstract class Command
     public function run()
     {
         $process = new Process($this->command(), $this->subcommand(), $this->arguments);
+        
+        if($this->input) {
+            $process->getBuilder()->setInput($this->input);
+        }
+        
         $data = $process->run();
         
         if (! is_null($this->returnClass())) {
@@ -171,6 +183,26 @@ abstract class Command
     }
 
     /**
+     * Get the value that will be passed to the command by STDIN.
+     * 
+     * @return string
+     */
+    public function getInput()
+    {
+        return $this->input;
+    }
+
+    /**
+     * Set the value that will be passed to the command by STDIN.
+     * 
+     * @param string $input The new input command.
+     */
+    public function setInput($input)
+    {
+        $this->input = $input;
+    }
+
+    /**
      * The class that represents the command return object. If the command 
      * hasn't return, the return of the function must be null.
      * 
@@ -205,4 +237,5 @@ abstract class Command
      * @return string[] The accepted arguments name.
      */
     public abstract function acceptedArguments();
+ 
 }
