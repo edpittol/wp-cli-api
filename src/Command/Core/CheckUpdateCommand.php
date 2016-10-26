@@ -10,7 +10,7 @@ class CheckUpdateCommand extends CoreCommand
 {
 
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \WP_CLI\Api\Command\Command::subcommand()
      */
@@ -20,7 +20,7 @@ class CheckUpdateCommand extends CoreCommand
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \WP_CLI\Api\Command\Command::acceptedArguments()
      */
@@ -36,7 +36,7 @@ class CheckUpdateCommand extends CoreCommand
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \WP_CLI\Api\Command\Command::returnClass()
      */

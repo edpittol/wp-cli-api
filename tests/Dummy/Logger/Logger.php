@@ -17,7 +17,7 @@ class Logger implements LoggerInterface
     protected $output;
 
     /**
-     * Create the logger with array that store the logger output. 
+     * Create the logger with array that store the logger output.
      */
     public function __construct()
     {

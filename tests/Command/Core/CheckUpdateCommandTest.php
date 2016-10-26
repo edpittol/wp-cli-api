@@ -32,9 +32,10 @@ class CheckUpdateCommandTest extends TestCase
         $this->assertEquals('major', $data[1]->getUpdateType());
         
         $this->assertRegExp('/([0-9]+\.){1,2}[0-9]*/', $data[0]->getVersion());
-        
-        $versionRegex = str_replace('.', '\.', $data[0]->getVersion());
-        $this->assertRegExp(sprintf('/^https\:\/\/downloads\.wordpress\.org\/release\/wordpress-%s.*\.zip$/', $versionRegex), $data[0]->getPackageUrl());
+
+        $version = str_replace('.', '\.', $data[0]->getVersion());
+        $releaseRegex = sprintf('/^https\:\/\/downloads\.wordpress\.org\/release\/wordpress-%s.*\.zip$/', $version);
+        $this->assertRegExp($releaseRegex, $data[0]->getPackageUrl());
         
         // back to the last version
         $process = new Process('core', 'update');

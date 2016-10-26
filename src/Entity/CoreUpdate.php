@@ -8,19 +8,19 @@ class CoreUpdate
 {
 
     /**
-     * 
+     *
      * @var string The version to be updated.
      */
     private $version;
 
     /**
-     * 
+     *
      * @var string The update type, minor or major.
      */
     private $updateType;
 
     /**
-     * 
+     *
      * @var string The zip package URL to download.
      */
     private $packageUrl;
@@ -28,7 +28,7 @@ class CoreUpdate
     /**
      * Get the version to be updated.
      *
-     * @return string The version. 
+     * @return string The version.
      */
     public function getVersion()
     {
@@ -59,7 +59,7 @@ class CoreUpdate
 
     /**
      * Set the update type. The type can be minor or major.
-     * 
+     *
      * @param $updateType The update type.
      * @return CoreUpdate The object itself.
      */
@@ -81,7 +81,7 @@ class CoreUpdate
 
     /**
      * Set the zip package URL to download.
-     * 
+     *
      * @param $packageUrl The zip package URL.
      * @return CoreUpdate The object itself.
      */
@@ -90,5 +90,4 @@ class CoreUpdate
         $this->packageUrl = $packageUrl;
         return $this;
     }
- 
 }

@@ -5,40 +5,40 @@ use WP_CLI\Api\Process\Process;
 use WP_CLI\Api\Serializer\Factory;
 
 /**
- * This class abstract a WP-CLI command. This is an abstract class. It must 
+ * This class abstract a WP-CLI command. This is an abstract class. It must
  * extend for each cammand class.
  */
 abstract class Command
 {
     /**
-     * 
+     *
      * @var string[] The command arguments in flat mode.
      */
     private $arguments;
 
     /**
-     * 
+     *
      * @var string|null[string] The command extrated to separate key and value.
-     *  If the argument is a flag (without value). The value of the array item 
+     *  If the argument is a flag (without value). The value of the array item
      *  will be null.
      */
     private $extractedArguments = array();
 
     /**
-     * 
+     *
      * @var string Pass some data to the command by STDIN.
      */
     private $input;
 
     /**
-     * Instantiate a command. The constructor extract the arguments to a 
+     * Instantiate a command. The constructor extract the arguments to a
      * key/value array, validate if the arguments is valid and set the
      * default commands.
-     * 
+     *
      * The default values is defined to arguments that override the WP-CLI
      * defaults. Instead maintain the WP-CLI defaults. For example, the format
      * argument is overrided by JSON. In WP-CLI, the default is table.
-     * 
+     *
      * @param string[] $args The command arguments. They must be passed in the
      *  flat format. For example: '--foo=bar'.
      */
@@ -53,17 +53,17 @@ abstract class Command
 
     /**
      * Execute the command. If the command has a return class, will be returned
-     * null, if the command output is empty, an array of the return class 
+     * null, if the command output is empty, an array of the return class
      * objects, if the command return a set of registers, or a return class
      * object if the command return a individual item.
-     * 
+     *
      * @return mixed
      */
     public function run()
     {
         $process = new Process($this->command(), $this->subcommand(), $this->arguments);
         
-        if($this->input) {
+        if ($this->input) {
             $process->getBuilder()->setInput($this->input);
         }
         
@@ -113,14 +113,15 @@ abstract class Command
 
     /**
      * Validade if the arguments is valid for the command.
-     * 
+     *
      * @throws \InvalidArgumentException If the argument is invalid.
      */
     private function validateArguments()
     {
         foreach (array_keys($this->extractedArguments) as $arg) {
             if (! in_array($arg, $this->acceptedArguments())) {
-                throw new \InvalidArgumentException(sprintf('Argument \'%s\' is invalid to command \'%s %s\'', $arg, $this->command(), $this->subcommand()));
+                $message = 'Argument \'%s\' is invalid to command \'%s %s\'';
+                throw new \InvalidArgumentException(sprintf($message, $arg, $this->command(), $this->subcommand()));
             }
         }
     }
@@ -154,7 +155,7 @@ abstract class Command
 
     /**
      * Return the command arguments.
-     * 
+     *
      * @return string[] The argument list.
      */
     public function getArguments()
@@ -164,15 +165,15 @@ abstract class Command
 
     /**
      * Get the value of an argument
-     * 
+     *
      * @param string $arg The argument name
      * @return boolean|string True, if the argument is a flag. An string if the
      *  argument has value. False, if not found the argument.
      */
     public function getArgument($arg)
     {
-        if(key_exists($arg, $this->extractedArguments)) {
-            if(is_null($this->extractedArguments[$arg])) {
+        if (key_exists($arg, $this->extractedArguments)) {
+            if (is_null($this->extractedArguments[$arg])) {
                 return true;
             }
             
@@ -184,7 +185,7 @@ abstract class Command
 
     /**
      * Get the value that will be passed to the command by STDIN.
-     * 
+     *
      * @return string
      */
     public function getInput()
@@ -194,7 +195,7 @@ abstract class Command
 
     /**
      * Set the value that will be passed to the command by STDIN.
-     * 
+     *
      * @param string $input The new input command.
      */
     public function setInput($input)
@@ -203,13 +204,13 @@ abstract class Command
     }
 
     /**
-     * The class that represents the command return object. If the command 
+     * The class that represents the command return object. If the command
      * hasn't return, the return of the function must be null.
-     * 
+     *
      * Use the ::class keyword as return.
-     * 
+     *
      * @link http://php.net/manual/en/language.oop5.basic.php#language.oop5.basic.class.class
-     * 
+     *
      * @return null|string The class name
      */
     public function returnClass()
@@ -219,23 +220,22 @@ abstract class Command
 
     /**
      * The command name.
-     * 
+     *
      * @return string The command name.
      */
-    public abstract function command();
+    abstract public function command();
 
     /**
      * The subcommand name.
-     * 
+     *
      * @return string The subcommand name.
      */
-    public abstract function subcommand();
+    abstract public function subcommand();
 
     /**
      * The arguments that are accepted by the subcommand.
-     * 
+     *
      * @return string[] The accepted arguments name.
      */
-    public abstract function acceptedArguments();
- 
+    abstract public function acceptedArguments();
 }

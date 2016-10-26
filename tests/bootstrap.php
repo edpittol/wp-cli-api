@@ -19,6 +19,6 @@ echo sprintf('Web server started with PID %d', $pid) . PHP_EOL;
 
 // Kill the web server when the process ends
 register_shutdown_function(function () use ($pid) {
-    echo sprintf('Killing web server with PID %d',$pid) . PHP_EOL;
+    echo sprintf('Killing web server with PID %d', $pid) . PHP_EOL;
     exec('kill ' . $pid);
 });

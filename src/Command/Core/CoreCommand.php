@@ -10,7 +10,7 @@ abstract class CoreCommand extends Command
 {
 
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \WP_CLI\Api\Command\Command::command()
      */

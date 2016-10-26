@@ -8,7 +8,7 @@ class ConfigCommand extends CoreCommand
 {
 
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \WP_CLI\Api\Command\Command::subcommand()
      */
@@ -18,7 +18,7 @@ class ConfigCommand extends CoreCommand
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \WP_CLI\Api\Command\Command::acceptedArguments()
      */

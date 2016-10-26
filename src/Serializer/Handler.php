@@ -16,20 +16,20 @@ class Handler implements SubscribingHandlerInterface
 {
     /**
      * Subscribe the deserialization methods.
-     * 
+     *
      * http://jmsyst.com/libs/serializer/master/handlers#subscribing-handlers
-     * 
+     *
      * @return string[][] The deserialization methods.
      */
     public static function getSubscribingMethods()
     {
         return array(
-        	array(
+            array(
                 'direction' => GraphNavigator::DIRECTION_DESERIALIZATION,
                 'format' => 'json',
                 'type' => \stdClass::class,
                 'method' => 'deserializeJsonToStdClass',
-        	),
+            ),
             array(
                 'direction' => GraphNavigator::DIRECTION_DESERIALIZATION,
                 'format' => 'json',
@@ -41,15 +41,15 @@ class Handler implements SubscribingHandlerInterface
 
     /**
      * Deserialize JSON to stdClass.
-     * 
-     * @param JsonDeserializationVisitor $visitor The deserialization class 
+     *
+     * @param JsonDeserializationVisitor $visitor The deserialization class
      *  object.
      * @param string[string] $items The object or array of the type.
      * @param string[string] $type The items type info.
      *  [name] string The type class name.
      *  [parms] mixed[] The object params
      * @param Context $context The Serializer context.
-     * @return null|StdClass|StdClass[] Null, if the data is empty, StdClass, 
+     * @return null|StdClass|StdClass[] Null, if the data is empty, StdClass,
      *  if the data is a singular object, and a stdClass array if data is an
      *  array.
      */
@@ -62,7 +62,7 @@ class Handler implements SubscribingHandlerInterface
         }
 
         if ($util->isAssociative($items)) {
-    	   return (object) $items;
+            return (object) $items;
         }
         
         $returnData = array();
@@ -75,21 +75,21 @@ class Handler implements SubscribingHandlerInterface
 
     /**
      * Deserialize JSON to stdClass.
-     * 
-     * @param JsonDeserializationVisitor $visitor The deserialization class 
+     *
+     * @param JsonDeserializationVisitor $visitor The deserialization class
      *  object.
      * @param string[string] $type The items type info.
      * @param string|array[string] $type The items type info.
      *  [name] string The type class name.
      *  [parms] mixed[] The object params
      * @param Context $context The Serializer context
-     * @return null|CoreUpdate|CoreUpdate[] Null, if the data is empty, 
+     * @return null|CoreUpdate|CoreUpdate[] Null, if the data is empty,
      *  CoreUpdate, if the data is a singular object, and a CoreUpdate array if
      *  data is an array.
      */
     public function deserializeJsonToCore(JsonDeserializationVisitor $visitor, $items, array $type, Context $context)
     {
-        if(is_null($items)) {
+        if (is_null($items)) {
             return null;
         }
         

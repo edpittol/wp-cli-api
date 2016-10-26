@@ -5,8 +5,8 @@ use WP_CLI\Api\Command\Command as BaseCommand;
 
 /**
  * A dummy class for test Command astract class with an arg that is a flag (an
- * argument without value). This class simulate the `wp core version` command 
- * without return any data. The objective isn't test the command. But the 
+ * argument without value). This class simulate the `wp core version` command
+ * without return any data. The objective isn't test the command. But the
  * non-abstract Command class methods.
  */
 class CommandFlagArg extends BaseCommand

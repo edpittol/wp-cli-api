@@ -10,6 +10,7 @@
     <rule ref="PSR2" />
  
     <!-- Sniff all PHP project files -->
-    <file>src/</file>
-    <file>tests/</file>
+    <file>./src/</file>
+    <file>./tests/</file>
+    <exclude-pattern>*/wp/*</exclude-pattern>
 </ruleset>
