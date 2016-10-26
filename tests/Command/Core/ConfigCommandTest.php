@@ -4,22 +4,28 @@ namespace WP_CLI\Api\Test\Command;
 use PHPUnit\Framework\TestCase;
 use WP_CLI\Api\Command\Core\ConfigCommand;
 
-
-class CheckUpdateCommandTest extends TestCase
+class CheckConfigCommandTest extends TestCase
 {
-    public function getWpConfigFile()
+    public static function getWpConfigFile()
     {
         return __DIR__ . '/../../wp/wp-config.php';
+    }
+    
+    public static function removeWpConfigFile()
+    {
+        unlink(self::getWpConfigFile());
     }
 
     public function setUp()
     {
         // remove wp-config.php
-        unlink($this->getWpConfigFile());
+        self::removeWpConfigFile();
     }
     
-    public function tearDownAfterClass()
+    public static function tearDownAfterClass()
     {
+        self::removeWpConfigFile();
+        
         // create the default wp-config.php
         $command = new ConfigCommand();
         $command->run();
@@ -38,7 +44,7 @@ class CheckUpdateCommandTest extends TestCase
         $coreCommand = new ConfigCommand(array('--extra-php'), $extraPhp);
         $coreCommand->run();
         
-        $wpConfig = file_get_contents($this->getWpConfigFile());
+        $wpConfig = file_get_contents(self::getWpConfigFile());
         
         $this->assertContains($extraPhp, $wpConfig);
     }
