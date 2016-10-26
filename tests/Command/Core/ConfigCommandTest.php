@@ -4,7 +4,7 @@ namespace WP_CLI\Api\Test\Command;
 use PHPUnit\Framework\TestCase;
 use WP_CLI\Api\Command\Core\ConfigCommand;
 
-class CheckConfigCommandTest extends TestCase
+class ConfigCommandTest extends TestCase
 {
     public static function getWpConfigFile()
     {
