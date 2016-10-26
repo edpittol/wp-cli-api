@@ -70,6 +70,10 @@ abstract class Command
         $data = $process->run();
         
         if (! is_null($this->returnClass())) {
+            if ('raw' === $this->returnClass()) {
+                return $data;
+            }
+            
             $serializer = Factory::create();
             $return = $serializer->deserialize($data, $this->returnClass(), 'json');
             return $return;
