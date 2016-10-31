@@ -36,7 +36,7 @@ class Process
      * Create the WP-CLI process.
      *
      * @param string $command The WP-CLI command to run.
-     * @param string $subcommand  The subcommand.
+     * @param string $subcommand The subcommand.
      * @param array $arguments The command arguments.
      */
     public function __construct($command, $subcommand, $arguments = array())
@@ -44,9 +44,15 @@ class Process
         // Create the builder and set the WP-CLI binary to be executed
         $this->builder = new ProcessBuilder();
         $this->builder->setPrefix($this->getWpCliBin());
-        
-        array_unshift($arguments, $command, $subcommand);
-        
+
+        array_unshift($arguments, $subcommand);
+
+        // split command words and add the beginning of arguments
+        $command = explode(' ', $command);
+        foreach (array_reverse($command) as $c) {
+            array_unshift($arguments, $c);
+        }
+
         $this->builder->setArguments($arguments);
     }
 

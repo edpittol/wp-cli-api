@@ -31,6 +31,12 @@ abstract class Command
     private $input;
 
     /**
+     *
+     * @var string The regex to match a parameter argument.
+     */
+    private static $parameterArgumentRegex = '/--([^=]*)(=(.*))?/';
+
+    /**
      * Instantiate a command. The constructor extract the arguments to a
      * key/value array, validate if the arguments is valid and set the
      * default commands.
@@ -88,6 +94,11 @@ abstract class Command
     {
         $this->extractedArguments = array();
         foreach ($this->arguments as $argument) {
+            // skip non parameter arguments
+            if (! preg_match(self::$parameterArgumentRegex, $argument)) {
+                continue;
+            }
+            
             $extracted = $this->extractArgumentValue($argument);
             $this->extractedArguments[$extracted['key']] = $extracted['value'];
         }
@@ -124,8 +135,10 @@ abstract class Command
     {
         foreach (array_keys($this->extractedArguments) as $arg) {
             if (! in_array($arg, $this->acceptedArguments())) {
-                $message = 'Argument \'%s\' is invalid to command \'%s %s\'';
-                throw new \InvalidArgumentException(sprintf($message, $arg, $this->command(), $this->subcommand()));
+                if (! in_array($arg, $this->fields())) {
+                    $message = 'Argument \'%s\' is invalid to command \'%s %s\'';
+                    throw new \InvalidArgumentException(sprintf($message, $arg, $this->command(), $this->subcommand()));
+                }
             }
         }
     }
@@ -220,6 +233,17 @@ abstract class Command
     public function returnClass()
     {
         return null;
+    }
+
+    /**
+     * If the command is searchable, the list of fields must be defined in the
+     * child class.
+     *
+     * @return string[] The list of available fields.
+     */
+    public function fields()
+    {
+        return array();
     }
 
     /**
