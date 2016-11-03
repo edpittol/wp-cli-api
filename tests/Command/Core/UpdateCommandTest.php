@@ -5,7 +5,7 @@ use PHPUnit\Framework\TestCase;
 use WP_CLI\Api\Process\Process;
 use WP_CLI\Api\Command\Core\UpdateCommand;
 
-class InstallCommandTest extends TestCase
+class UpdateCommandTest extends TestCase
 {
     public function testUpdate()
     {
