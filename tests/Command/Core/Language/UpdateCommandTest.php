@@ -1,10 +1,10 @@
 <?php
-namespace WP_CLI\Api\Test\Command;
+namespace WP_CLI\Api\Test\Command\Core\Language;
 
 use PHPUnit\Framework\TestCase;
 use WP_CLI\Api\Command\Core\Language\UpdateCommand;
 
-class LanguageUpdateCommandTest extends TestCase
+class UpdateCommandTest extends TestCase
 {
 
     public function testUpdate()

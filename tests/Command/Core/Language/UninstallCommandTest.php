@@ -1,10 +1,10 @@
 <?php
-namespace WP_CLI\Api\Test\Command;
+namespace WP_CLI\Api\Test\Command\Core\Language;
 
 use PHPUnit\Framework\TestCase;
 use WP_CLI\Api\Command\Core\Language\UninstallCommand;
 
-class InstallCommandTest extends TestCase
+class UninstallCommandTest extends TestCase
 {
     public function testUninstall()
     {        

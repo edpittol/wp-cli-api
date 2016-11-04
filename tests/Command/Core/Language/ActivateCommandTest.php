@@ -1,11 +1,11 @@
 <?php
-namespace WP_CLI\Api\Test\Command;
+namespace WP_CLI\Api\Test\Command\Core\Language;
 
 use PHPUnit\Framework\TestCase;
 use WP_CLI\Api\Process\Process;
 use WP_CLI\Api\Command\Core\Language\ActivateCommand;
 
-class LanguageActivateCommandTest extends TestCase
+class ActivateCommandTest extends TestCase
 {
 
     public function testActivate()
