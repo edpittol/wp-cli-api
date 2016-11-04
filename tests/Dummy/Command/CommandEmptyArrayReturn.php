@@ -8,7 +8,7 @@ namespace WP_CLI\Api\Test\Dummy\Command;
  *
  * This class extends the dummy class Command.
  */
-class CommandNullReturn extends Command
+class CommandEmptyArrayReturn extends Command
 {
     public function __construct()
     {

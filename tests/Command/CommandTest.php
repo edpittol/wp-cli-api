@@ -6,7 +6,7 @@ use WP_CLI\Api\Test\Dummy\Command\Command;
 use WP_CLI\Api\Test\Dummy\Command\CommandWithData;
 use WP_CLI\Api\Test\Dummy\Command\CommandFlagArg;
 use WP_CLI\Api\Test\Dummy\Command\CommandAssociativeReturn;
-use WP_CLI\Api\Test\Dummy\Command\CommandNullReturn;
+use WP_CLI\Api\Test\Dummy\Command\CommandEmptyArrayReturn;
 
 class CommandTest extends TestCase
 {
@@ -37,9 +37,9 @@ class CommandTest extends TestCase
     
     public function testRunWithNullReturn()
     {
-        $command = new CommandNullReturn();
+        $command = new CommandEmptyArrayReturn();
         $returnData = $command->run();
-        $this->assertNull($returnData);
+        $this->assertEmpty($returnData);
     }
     
     public function testInvalidArgument()
