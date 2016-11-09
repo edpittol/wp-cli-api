@@ -12,7 +12,7 @@ class CheckUpdateCommandTest extends TestCase
     {
         $coreCommand = new CheckUpdateCommand();
         $data = $coreCommand->run();
-        $this->assertNull($data);
+        $this->assertEmpty($data);
     }
 
     public function testCheckUpdateMajorMinor()

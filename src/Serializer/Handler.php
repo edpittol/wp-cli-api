@@ -67,7 +67,7 @@ class Handler implements SubscribingHandlerInterface
         }
 
         if ($util->isAssociative($items)) {
-            return (object) $items;
+            return array((object) $items);
         }
         
         $returnData = array();

@@ -32,10 +32,10 @@ class CommandTest extends TestCase
     {
         $command = new CommandAssociativeReturn();
         $returnData = $command->run();
-        $this->assertInstanceOf(\stdClass::class, $returnData);
+        $this->assertInstanceOf(\stdClass::class, $returnData[0]);
     }
     
-    public function testRunWithNullReturn()
+    public function testRunWithEmptyArrayReturn()
     {
         $command = new CommandEmptyArrayReturn();
         $returnData = $command->run();
