@@ -29,25 +29,25 @@ class Handler implements SubscribingHandlerInterface
                 'direction' => GraphNavigator::DIRECTION_DESERIALIZATION,
                 'format' => 'json',
                 'type' => \stdClass::class,
-                'method' => 'deserializeJsonToStdClass',
+                'method' => 'deserializeJson',
             ),
             array(
                 'direction' => GraphNavigator::DIRECTION_DESERIALIZATION,
                 'format' => 'json',
                 'type' => CoreUpdate::class,
-                'method' => 'deserializeJsonToCore',
+                'method' => 'deserializeJson',
             ),
             array(
                 'direction' => GraphNavigator::DIRECTION_DESERIALIZATION,
                 'format' => 'json',
                 'type' => Language::class,
-                'method' => 'deserializeJsonToLanguage',
+                'method' => 'deserializeJson',
             ),
         );
     }
 
     /**
-     * Deserialize JSON to stdClass.
+     * Deserialize JSON to an array of object.
      *
      * @param JsonDeserializationVisitor $visitor The deserialization class
      *  object.
@@ -56,16 +56,32 @@ class Handler implements SubscribingHandlerInterface
      *  [name] string The type class name.
      *  [parms] mixed[] The object params
      * @param Context $context The Serializer context.
-     * @return StdClass[] An array with returned data.
+     * @return StdClass[]|CoreUpdate[]|Language[] An array with returned data.
      */
-    public function deserializeJsonToStdClass(JsonDeserializationVisitor $visitor, $items, $type, Context $context)
-    {
-        $util = new ArrayUtil();
-        
+    public function deserializeJson(JsonDeserializationVisitor $visitor, $items, $type, Context $context) {        
         if (empty($items)) {
             return array();
         }
 
+        switch ($type['name']) {
+            case CoreUpdate::class :
+                return $this->deserializeToCore($items);
+            case Language::class :
+                return $this->deserializeToLanguage($items);
+        }
+
+        return $this->deserializeToStdClass($items);
+    }
+
+    /**
+     * Convert an associative array to stdClass objects array.
+     * 
+     * @param array $items The items.
+     * @return StdClass[] The array with the objects.
+     */
+    public function deserializeToStdClass($items)
+    {        
+        $util = new ArrayUtil();
         if ($util->isAssociative($items)) {
             return array((object) $items);
         }
@@ -79,23 +95,13 @@ class Handler implements SubscribingHandlerInterface
     }
 
     /**
-     * Deserialize JSON to stdClass.
+     * Convert an associative array to CoreUpdate objects array.
      *
-     * @param JsonDeserializationVisitor $visitor The deserialization class
-     *  object.
-     * @param string[string] $type The items type info.
-     * @param string|array[string] $type The items type info.
-     *  [name] string The type class name.
-     *  [parms] mixed[] The object params
-     * @param Context $context The Serializer context
-     * @return CoreUpdate[] An array with returned data.
+     * @param array $items The items.
+     * @return CoreUpdate[] The array with the objects.
      */
-    public function deserializeJsonToCore(JsonDeserializationVisitor $visitor, $items, array $type, Context $context)
-    {
-        if (is_null($items)) {
-            return array();
-        }
-        
+    public function deserializeToCore($items)
+    {        
         $returnData = array();
         foreach ($items as $item) {
             $coreUpdate = new CoreUpdate();
@@ -110,23 +116,13 @@ class Handler implements SubscribingHandlerInterface
     }
 
     /**
-     * Deserialize JSON to language object.
+     * Convert an associative array to Language objects array.
      *
-     * @param JsonDeserializationVisitor $visitor The deserialization class
-     *  object.
-     * @param string[string] $type The items type info.
-     * @param string|array[string] $type The items type info.
-     *  [name] string The type class name.
-     *  [parms] mixed[] The object params
-     * @param Context $context The Serializer context
-     * @return Language[] An array with returned data.
+     * @param array $items The items.
+     * @return Language[] The array with the objects.
      */
-    public function deserializeJsonToLanguage(JsonDeserializationVisitor $visitor, $items, array $type, Context $context)
+    public function deserializeToLanguage($items)
     {
-        if (is_null($items)) {
-            return array();
-        }
-        
         $returnData = array();
         foreach ($items as $item) {
             $language = new Language();
