@@ -34,7 +34,7 @@ class UpdateCommandTest extends TestCase
 
         $process = new Process('core', 'version');
         $version = $process->run();
-        $this->assertEquals('3.7.16', $version);
+        $this->assertEquals('3.7.16' . PHP_EOL, $version);
 
         // Do a major upgrade
         $process = new Process('core', 'update');
