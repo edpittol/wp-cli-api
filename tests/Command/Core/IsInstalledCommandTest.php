@@ -9,6 +9,20 @@ use WP_CLI\Api\Command\Core\InstallCommand;
 
 class IsInstalledCommandTest extends TestCase
 {
+    /**
+     * Garantee that the WordPress is installed after test
+     */
+    public static function tearDownAfterClass()
+    {
+        try {
+            $coreCommand = new IsInstalledCommand();
+            $coreCommand->run();
+        } catch (ProcessFailedException $e) {
+            $installCommand = new InstallCommand();
+            $installCommand->run();
+        }
+    }
+    
     public function testIsInstalled()
     {    
         $coreCommand = new IsInstalledCommand();
@@ -28,8 +42,5 @@ class IsInstalledCommandTest extends TestCase
         $coreCommand = new IsInstalledCommand();
         $coreCommand->run();
         
-        // Reinstall WordPress
-        $installCommand = new InstallCommand();
-        $installCommand->run();
     }
 }
