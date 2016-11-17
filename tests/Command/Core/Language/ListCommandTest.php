@@ -19,6 +19,13 @@ class ListCommandTest extends TestCase
     {
         $coreCommand = new ListCommand(array('--status=active'));
         $data = $coreCommand->run();
+        
         $this->assertInstanceOf(Language::class, $data[0]);
+        $this->assertEquals('en_US', $data[0]->getLanguage());
+        $this->assertEquals('English (United States)', $data[0]->getEnglishName());
+        $this->assertEquals('English (United States)', $data[0]->getNativeName());
+        $this->assertEquals('active', $data[0]->getStatus());
+        $this->assertEquals('none', $data[0]->getUpdate());
+        $this->assertNull($data[0]->getUpdated());
     }
 }

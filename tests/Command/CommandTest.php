@@ -76,4 +76,13 @@ class CommandTest extends TestCase
         $command = new Command();
         $this->assertEquals('json', $command->getArgument('format'));
     }
+    
+    public function testInput()
+    {
+        $command = new Command(array(), 'test');
+        $this->assertEquals('test', $command->getInput());
+        
+        $command->setInput('newvalue');
+        $this->assertEquals('newvalue', $command->getInput());
+    }
 }
