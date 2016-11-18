@@ -55,6 +55,7 @@ abstract class Command
         $this->validateArguments();
         $this->setDefaults();
         $this->input = $input;
+        $this->confirmPrompts = false;
     }
 
     /**
@@ -67,6 +68,10 @@ abstract class Command
      */
     public function run()
     {
+        if ($this->confirmPrompts()) {
+            $this->arguments[] = '--yes';
+        }
+        
         $process = new Process($this->command(), $this->subcommand(), $this->arguments);
         
         if ($this->input) {
@@ -244,6 +249,16 @@ abstract class Command
     public function fields()
     {
         return array();
+    }
+
+    /**
+     * Overidde to return true when the command need confirm the execution.
+     * 
+     * @return boolean True if command need confirmation. False, ohterwise.
+     */
+    public function confirmPrompts()
+    {
+        return false;
     }
 
     /**
