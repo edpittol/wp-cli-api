@@ -15,7 +15,8 @@ class ExportCommandTest extends TestCase
         }
     }
     
-    private function getSqlFile() {
+    private function getSqlFile()
+    {
         foreach (glob('*.sql') as $file) {
             return $file;
         }

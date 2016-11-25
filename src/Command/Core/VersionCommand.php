@@ -30,7 +30,7 @@ class VersionCommand extends CoreCommand
     }
     
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \WP_CLI\Api\Command\Command::returnClass()
      */

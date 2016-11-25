@@ -8,7 +8,7 @@ use WP_CLI\Api\Command\Core\Language\InstallCommand;
 class UninstallCommandTest extends TestCase
 {
     public function testUninstall()
-    {        
+    {
         $coreCommand = new InstallCommand(array('pt_BR'));
         $coreCommand->run();
         

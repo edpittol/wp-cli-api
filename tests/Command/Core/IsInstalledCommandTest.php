@@ -24,7 +24,7 @@ class IsInstalledCommandTest extends TestCase
     }
     
     public function testIsInstalled()
-    {    
+    {
         $coreCommand = new IsInstalledCommand();
         $coreCommand->run();
     }
@@ -41,6 +41,5 @@ class IsInstalledCommandTest extends TestCase
         
         $coreCommand = new IsInstalledCommand();
         $coreCommand->run();
-        
     }
 }

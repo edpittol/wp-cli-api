@@ -58,15 +58,16 @@ class Handler implements SubscribingHandlerInterface
      * @param Context $context The Serializer context.
      * @return StdClass[]|CoreUpdate[]|Language[] An array with returned data.
      */
-    public function deserializeJson(JsonDeserializationVisitor $visitor, $items, $type, Context $context) {        
+    public function deserializeJson(JsonDeserializationVisitor $visitor, $items, $type, Context $context)
+    {
         if (empty($items)) {
             return array();
         }
 
         switch ($type['name']) {
-            case CoreUpdate::class :
+            case CoreUpdate::class:
                 return $this->deserializeToCore($items);
-            case Language::class :
+            case Language::class:
                 return $this->deserializeToLanguage($items);
         }
 
@@ -75,12 +76,12 @@ class Handler implements SubscribingHandlerInterface
 
     /**
      * Convert an associative array to stdClass objects array.
-     * 
+     *
      * @param array $items The items.
      * @return StdClass[] The array with the objects.
      */
     public function deserializeToStdClass($items)
-    {        
+    {
         $util = new ArrayUtil();
         if ($util->isAssociative($items)) {
             return array((object) $items);
@@ -101,7 +102,7 @@ class Handler implements SubscribingHandlerInterface
      * @return CoreUpdate[] The array with the objects.
      */
     public function deserializeToCore($items)
-    {        
+    {
         $returnData = array();
         foreach ($items as $item) {
             $coreUpdate = new CoreUpdate();

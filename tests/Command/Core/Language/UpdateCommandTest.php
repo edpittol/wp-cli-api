@@ -8,13 +8,13 @@ class UpdateCommandTest extends TestCase
 {
 
     public function testUpdate()
-    {        
+    {
         $coreCommand = new UpdateCommand();
         $coreCommand->run();
     }
 
     public function testUpdateWithDryRun()
-    {        
+    {
         $coreCommand = new UpdateCommand(array('--dry-run'));
         $coreCommand->run();
     }

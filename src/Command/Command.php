@@ -253,7 +253,7 @@ abstract class Command
 
     /**
      * Overidde to return true when the command need confirm the execution.
-     * 
+     *
      * @return boolean True if command need confirmation. False, ohterwise.
      */
     public function confirmPrompts()

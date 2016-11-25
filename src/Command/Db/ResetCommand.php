@@ -28,7 +28,7 @@ class ResetCommand extends DbCommand
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \WP_CLI\Api\Command\Command::confirmPrompts()
      */

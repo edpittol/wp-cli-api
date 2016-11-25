@@ -28,7 +28,7 @@ class DropCommand extends DbCommand
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \WP_CLI\Api\Command\Command::confirmPrompts()
      */

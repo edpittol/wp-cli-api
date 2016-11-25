@@ -31,7 +31,7 @@ class ExportCommand extends DbCommand
     }
 
     /**
-     * 
+     *
      * {@inheritDoc}
      * @see \WP_CLI\Api\Command\Command::returnClass()
      */
@@ -39,7 +39,7 @@ class ExportCommand extends DbCommand
     {
         // find by - argument that return the SQL content in STDOUT
         foreach ($this->getArguments() as $key => $value) {
-            if( is_int($key) && '-' === $value ) {
+            if (is_int($key) && '-' === $value) {
                 return 'raw';
             }
         }

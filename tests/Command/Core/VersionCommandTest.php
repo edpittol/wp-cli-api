@@ -5,9 +5,10 @@ use PHPUnit\Framework\TestCase;
 use WP_CLI\Api\Command\Core\VersionCommand;
 
 class VersionCommandTest extends TestCase
-{    
+{
+
     public function testVersion()
-    {        
+    {
         $coreCommand = new VersionCommand();
         $version = $coreCommand->run();
         
@@ -19,6 +20,6 @@ class VersionCommandTest extends TestCase
         $coreCommand = new VersionCommand(array('--extra'));
         $version = $coreCommand->run();
 
-        $this->assertRegExp('/WordPress version:.*\nDatabase revision:.*\nTinyMCE version:.*/', $version);        
+        $this->assertRegExp('/WordPress version:.*\nDatabase revision:.*\nTinyMCE version:.*/', $version);
     }
 }
